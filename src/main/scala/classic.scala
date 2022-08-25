@@ -17,7 +17,7 @@ object classic {
         case _ => None
       }
     } catch {
-      case e: IllegalArgumentException => throw GetAttributeException(name, e.getMessage)
+      case e: IllegalArgumentException => throw GetAttributeException( e.getMessage)
     }
     case _ => None
   }
@@ -26,7 +26,7 @@ object classic {
     case Some(r) => try {
       Some(Date.valueOf(r))
     } catch {
-      case e: IllegalArgumentException => throw GetAttributeException(name, e.getMessage)
+      case e: IllegalArgumentException => throw GetAttributeException(e.getMessage)
     }
     case _ => None
   }
@@ -35,7 +35,7 @@ object classic {
     case Some(r) => try {
       Some(r.toLong)
     } catch {
-      case e: NumberFormatException => throw GetAttributeException(name, e.getMessage)
+      case e: NumberFormatException => throw GetAttributeException(e.getMessage)
     }
     case _ => None
   }
@@ -44,7 +44,7 @@ object classic {
     case Some(r) => try {
       Some(r.toInt)
     } catch {
-      case e: NumberFormatException => throw GetAttributeException(name, e.getMessage)
+      case e: NumberFormatException => throw GetAttributeException(e.getMessage)
     }
     case _ => None
   }
@@ -58,7 +58,7 @@ object classic {
         case _ => throw GetAttributeException(name)
       }
     } catch {
-      case e: IllegalArgumentException => throw GetAttributeException(name, e.getMessage)
+      case e: IllegalArgumentException => throw GetAttributeException(e.getMessage)
     }
     case _ => throw GetAttributeException(name)
   }
@@ -66,34 +66,34 @@ object classic {
   def getString(name: String)(implicit attr: Map[String, String]): String =
     attr.get(name) match {
       case Some(r) => r
-      case _ => throw GetAttributeException(name, s"Attribute $name, not found.")
+      case _ => throw GetAttributeException(s"Attribute $name, not found.")
     }
 
   def getDate(name: String)(implicit attr: Map[String, String]): Date = attr.get(name) match {
     case Some(r) => try {
       Date.valueOf(r)
     } catch {
-      case e: IllegalArgumentException => throw GetAttributeException(name, e.getMessage)
+      case e: IllegalArgumentException => throw GetAttributeException(e.getMessage)
     }
-    case _ => throw GetAttributeException(name, s"Attribute $name, not found.")
+    case _ => throw GetAttributeException(s"Attribute $name, not found.")
   }
 
   def getLong(name: String)(implicit attr: Map[String, String]): Long = attr.get(name) match {
     case Some(r) => try {
       r.toLong
     } catch {
-      case e: NumberFormatException => throw GetAttributeException(name, e.getMessage)
+      case e: NumberFormatException => throw GetAttributeException(e.getMessage)
     }
-    case _ => throw GetAttributeException(name, s"Attribute $name, not found.")
+    case _ => throw GetAttributeException(s"Attribute $name, not found.")
   }
 
   def getInt(name: String)(implicit attr: Map[String, String]): Int = attr.get(name) match {
     case Some(r) => try {
       r.toInt
     } catch {
-      case e: NumberFormatException => throw GetAttributeException(name, e.getMessage)
+      case e: NumberFormatException => throw GetAttributeException(e.getMessage)
     }
-    case _ => throw GetAttributeException(name, s"Attribute $name, not found.")
+    case _ => throw GetAttributeException(s"Attribute $name, not found.")
   }
 
 }

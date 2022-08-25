@@ -1,4 +1,16 @@
-final case class GetAttributeException(attribute: String,
-                                       private val message: String = "",
-                                       private val cause: Throwable = None.orNull)
-  extends Exception(message, cause)
+final case class GetAttributeException(message: String)
+  extends Exception(message) {
+
+  def this(message: String, cause: Throwable) {
+    this(message)
+    initCause(cause)
+  }
+
+  def this(cause: Throwable) {
+    this(Option(cause).map(_.toString).getOrElse(""), cause)
+  }
+
+  def this() {
+    this(null: String)
+  }
+}

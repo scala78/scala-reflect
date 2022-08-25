@@ -26,16 +26,16 @@ object typed {
             case _ => throw GetAttributeException(name)
           }
         } catch {
-          case e: IllegalArgumentException => throw GetAttributeException(name, e.getMessage)
+          case e: IllegalArgumentException => throw GetAttributeException(e.getMessage)
         }
      //   case _ if typeT =:= typeOf[Int] => r.toInt.asInstanceOf[T]
         case _ => r.asInstanceOf[T]
       }
     }
     catch {
-      case e: RuntimeException => throw GetAttributeException(name, e.getMessage)
+      case e: RuntimeException => throw GetAttributeException(e.getMessage)
     }
-    case _ => throw GetAttributeException(name, s"Error attribute $name is not defined.")
+    case _ => throw GetAttributeException(s"Error attribute $name is not defined.")
   }
 
   /**
@@ -62,12 +62,12 @@ object typed {
             case _ => None
           }
         } catch {
-          case e: IllegalArgumentException => throw GetAttributeException(name, e.getMessage)
+          case e: IllegalArgumentException => throw GetAttributeException(e.getMessage)
         }
         case _ => Some(r.asInstanceOf[T])
       }
     } catch {
-      case e: RuntimeException => throw GetAttributeException(name, e.getMessage)
+      case e: RuntimeException => throw GetAttributeException(e.getMessage)
     }
     case None => None
   }
